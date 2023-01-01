@@ -6,12 +6,20 @@ data class DataResult(
     companion object {
         private val activities = listOf<Activities>(
             Activities(
-                imageUrl = "https://ik.imagekit.io/6xgh00mrhaz/Cuba_App_Travel_Ui/beach.jpg",
+                imageUrl = "https://ik.imagekit.io/6xgh00mrhaz/Cuba_App_Travel_Ui/salmon.jpg",
                 name = "St. Juan C",
                 type = "Visitas guiadas",
                 startTimes = listOf("9:00 am", "11:00 am"),
                 rating = 5,
                 price = 30,
+            ),
+         Activities(
+                imageUrl = "https://ik.imagekit.io/6xgh00mrhaz/Cuba_App_Travel_Ui/beach.jpg",
+                name = "Restaurante El Mejor",
+                type = "Restaurante",
+                startTimes = listOf("7:00 am", "12:00 pm"),
+                rating = 5,
+                price = 10,
             ),
 
             Activities(
