@@ -1,0 +1,104 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.orlandev.travelapp'
+    compileSdk rootProject.targetSdk
+
+    defaultConfig {
+        minSdk rootProject.minSdk
+        targetSdk rootProject.targetSdk
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility sourceCompatibility
+        targetCompatibility targetCompatibility
+    }
+    kotlinOptions {
+        jvmTarget = jvmTarget
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_compiler
+    }
+
+    kapt {
+        correctErrorTypes true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+
+    //COMPOSE
+    implementation platform("androidx.compose:compose-bom:$compose_bom")
+    implementation "androidx.activity:activity-compose:$activity_compose"
+    implementation "androidx.compose.foundation:foundation"
+    implementation "androidx.compose.ui:ui"
+    debugImplementation "androidx.compose.ui:ui-tooling"
+    implementation "androidx.compose.ui:ui-tooling-preview"
+
+    implementation "androidx.compose.ui:ui-util"
+    implementation "androidx.compose.material:material"
+    implementation "androidx.compose.material3:material3"
+    implementation "androidx.compose.material3:material3-window-size-class"
+    implementation "androidx.compose.runtime:runtime"
+    implementation "androidx.compose.compiler:compiler:$compose_compiler"
+    implementation "androidx.compose.material:material-icons-core"
+    implementation "androidx.compose.material:material-icons-extended"
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines")
+
+
+    // Hilt (Dependency Injection) add id 'dagger.hilt.android.plugin' and  id 'kotlin-kapt'
+    //ADD IN PROJECT GRADLE classpath "com.google.dagger:hilt-android-gradle-plugin:2.35.1"
+    implementation "com.google.dagger:hilt-android:$daggerVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$daggerVersion"
+    //Delete this for use the new hilt integration
+    //implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    implementation "androidx.hilt:hilt-navigation-compose:$hiltVersion"
+    kapt "androidx.hilt:hilt-compiler:$hiltVersion"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}
