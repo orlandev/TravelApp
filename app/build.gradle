@@ -88,6 +88,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines")
 
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
     // Hilt (Dependency Injection) add id 'dagger.hilt.android.plugin' and  id 'kotlin-kapt'
     //ADD IN PROJECT GRADLE classpath "com.google.dagger:hilt-android-gradle-plugin:2.35.1"
