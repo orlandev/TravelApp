@@ -97,10 +97,6 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
         ) {
 
             item {
-                Spacer(modifier = Modifier.size(20.dp))
-            }
-
-            item {
                 Text(
                     modifier = Modifier.padding(horizontal = horizontalPadding),
                     text = stringResource(id = R.string.home_title_text),

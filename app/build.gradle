@@ -99,6 +99,12 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:$hiltVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltVersion"
 
+
+    //Accompanist
+    def accompanist_version = "0.27.0"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
