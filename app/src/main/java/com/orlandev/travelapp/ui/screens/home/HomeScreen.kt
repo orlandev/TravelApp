@@ -1,8 +1,6 @@
 package com.orlandev.travelapp.ui.screens.home
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -118,7 +116,8 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = horizontalPadding),
+                        .padding(horizontal = horizontalPadding)
+                        .horizontalScroll(rememberScrollState(0)),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -351,6 +350,7 @@ fun TravelCard(currentDestination: Destination, onClick: () -> Unit) {
         ) {
 
             androidx.compose.material.Card(
+                backgroundColor = MaterialTheme.colorScheme.background,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp)
