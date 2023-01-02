@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TravelApp</string>
+    <string name="home_title_text">Que te gustaría buscar?</string>
+    <string name="top_destinations">Mejores destinos</string>
+    <string name="see_all">Ver todo</string>
+    <string name="exclusive_destinations">Destinos Exclusivos</string>
 </resources>
