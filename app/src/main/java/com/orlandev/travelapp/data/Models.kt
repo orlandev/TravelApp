@@ -19,7 +19,7 @@ data class DataResult(
                 imageUrl = "https://ik.imagekit.io/6xgh00mrhaz/Cuba_App_Travel_Ui/bar.jpg",
                 name = "Bar la ilusión",
                 type = "Bar",
-                startTimes = listOf("9:00 am", "10:00 9pm"),
+                startTimes = listOf("9:00 am", "10:00 pm"),
                 rating = 5,
                 price = 50,
             ),

@@ -103,7 +103,7 @@ dependencies {
     //Accompanist
     def accompanist_version = "0.27.0"
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
-
+    implementation "com.google.accompanist:accompanist-placeholder:$accompanist_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

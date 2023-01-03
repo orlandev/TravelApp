@@ -256,57 +256,61 @@ fun ExclusiveDestination(someDestination: Destination, onClick: () -> Unit) {
             }
         }
 
-        androidx.compose.material.Card(
+        ImageBanner(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(4f / 3f)
                 .padding(horizontal = horizontalPadding)
                 .padding(8.dp)
-                .clickable { onClick() },
-            elevation = 12.dp,
-            shape = RoundedCornerShape(25.dp)
-        ) {
+                .clickable { onClick() }, someDestination
+        )
 
+    }
+}
 
-            Box(modifier = Modifier.fillMaxSize()) {
-                AsyncImage(
-                    modifier = Modifier.fillMaxSize(),
-                    model = someDestination.imageUrl,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = someDestination.city
+@Composable
+fun ImageBanner(modifier: Modifier = Modifier, someDestination: Destination) {
+    androidx.compose.material.Card(
+        modifier = modifier,
+        elevation = 12.dp,
+        shape = RoundedCornerShape(25.dp)
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            AsyncImage(
+                modifier = Modifier.fillMaxSize(),
+                model = someDestination.imageUrl,
+                contentScale = ContentScale.Crop,
+                contentDescription = someDestination.city
+            )
+
+            Gradient()
+
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(10.dp)
+            ) {
+                Text(
+                    text = someDestination.city,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontSize = 22.sp, fontWeight = FontWeight.Bold,
+                    color = textWhiteColor
                 )
 
-                Gradient()
-
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .padding(10.dp)
-                ) {
-                    Text(
-                        text = someDestination.city,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontSize = 22.sp, fontWeight = FontWeight.Bold,
-                        color = textWhiteColor
+                Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        modifier = Modifier.size(10.dp),
+                        painter = painterResource(id = R.drawable.gps_arrow_),
+                        contentDescription = null,
+                        tint = textWhiteColor.copy(alpha = 0.7f)
                     )
-
-                    Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            modifier = Modifier.size(10.dp),
-                            painter = painterResource(id = R.drawable.gps_arrow_),
-                            contentDescription = null,
-                            tint = textWhiteColor.copy(alpha = 0.7f)
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        Text(
-                            text = someDestination.country,
-                            color = textWhiteColor.copy(alpha = 0.7f)
-                        )
-                    }
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Text(
+                        text = someDestination.country,
+                        color = textWhiteColor.copy(alpha = 0.7f)
+                    )
                 }
             }
-
-
         }
     }
 }
