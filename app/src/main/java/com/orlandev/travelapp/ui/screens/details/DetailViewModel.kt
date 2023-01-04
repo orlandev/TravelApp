@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    val stateHandle: SavedStateHandle
+    private val stateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    val city = stateHandle[]
+    val city = stateHandle["city"]
 
     val dataResult = mutableStateOf(DataResult.mock)
 
