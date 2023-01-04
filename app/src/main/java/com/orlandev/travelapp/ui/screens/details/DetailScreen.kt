@@ -22,11 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
 import com.orlandev.travelapp.data.Activities
+import com.orlandev.travelapp.ui.screens.home.HomeViewModel
 import com.orlandev.travelapp.ui.screens.home.ImageBanner
 import com.orlandev.travelapp.ui.theme.containerColor
 import com.orlandev.travelapp.ui.theme.starColors
@@ -35,28 +37,32 @@ import com.orlandev.travelapp.utils.horizontalPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(detailViewModel: DetailViewModel = hiltViewModel()) {
+fun DetailScreen(
+    navController: NavController,
+    detailViewModel: HomeViewModel = hiltViewModel(),
+    id: String
+) {
 
-    val currentDestination = detailViewModel.dataResult.value.random() //Only for now
+    val currentDestination = detailViewModel.dataResult.value.find { it.city == id } //Only for now
+    currentDestination?.let {
+        Scaffold(modifier = Modifier.fillMaxSize()) {
 
-    Scaffold(modifier = Modifier.fillMaxSize()) {
-
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(4 / 3f)
-                ) {
-
-                    //Image
-
-                    ImageBanner(
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                item {
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .aspectRatio(4f / 3f)
-                            .padding(horizontal = 12.dp), someDestination = currentDestination
-                    )
+                            .aspectRatio(4 / 3f)
+                    ) {
+
+                        //Image
+
+                        ImageBanner(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .aspectRatio(4f / 3f)
+                                .padding(horizontal = 12.dp), someDestination = currentDestination
+                        )
 
 
                     Row(
@@ -87,6 +93,7 @@ fun DetailScreen(detailViewModel: DetailViewModel = hiltViewModel()) {
                 ActivityCard(currentActivity)
             }
         }
+    }
     }
 }
 

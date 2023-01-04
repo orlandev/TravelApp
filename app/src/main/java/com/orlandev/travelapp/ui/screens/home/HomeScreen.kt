@@ -22,14 +22,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.orlandev.travelapp.NavRoute
 import com.orlandev.travelapp.R
 import com.orlandev.travelapp.data.Destination
-import com.orlandev.travelapp.ui.theme.TravelAppTheme
 import com.orlandev.travelapp.ui.theme.containerColor
 import com.orlandev.travelapp.ui.theme.primaryColor
 import com.orlandev.travelapp.ui.theme.textWhiteColor
@@ -38,7 +38,7 @@ import com.orlandev.travelapp.utils.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
 
     val dataList = homeViewModel.dataResult.value
 
@@ -210,7 +210,9 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
                         }
                     }
 
-                    TravelList(dataList)
+                    TravelList(dataList) {
+                        navController.navigate(NavRoute.DetailScreenRoute.route + "/${it.city}")
+                    }
 
                 }
             }
@@ -316,7 +318,7 @@ fun ImageBanner(modifier: Modifier = Modifier, someDestination: Destination) {
 }
 
 @Composable
-fun TravelList(dataList: List<Destination>) {
+fun TravelList(dataList: List<Destination>, onClick: (Destination) -> Unit) {
     LazyRow(modifier = Modifier.fillMaxWidth()) {
         item {
             Spacer(modifier = Modifier.size(10.dp))
@@ -324,6 +326,7 @@ fun TravelList(dataList: List<Destination>) {
         items(dataList) { currentDestination ->
             TravelCard(currentDestination) {
                 //TODO PERFORM THE DETAILS NAV
+                onClick(currentDestination)
             }
         }
         item {
@@ -435,13 +438,6 @@ fun TravelCard(currentDestination: Destination, onClick: () -> Unit) {
     }
 }
 
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    TravelAppTheme {
-        HomeScreen()
-    }
-}
 
 @Composable
 fun Gradient() {
