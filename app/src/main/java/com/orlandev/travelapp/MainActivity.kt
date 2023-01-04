@@ -19,8 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 sealed class NavRoute(
-    val route: String,
-    val argument: String? = null
+    val route: String
 ) {
     object HomeScreenRoute : NavRoute(route = "home_screen")
     object DetailScreenRoute : NavRoute(route = "detail_screen")
@@ -53,11 +52,11 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = NavRoute.DetailScreenRoute.route + "/{id}",
-                            arguments = listOf(navArgument("id") { defaultValue = "" })
+                            route = NavRoute.DetailScreenRoute.route + "/{city}",
+                            arguments = listOf(navArgument("city") { defaultValue = "" })
                         )
                         {
-                            DetailScreen(navController, id = it.arguments?.getString("id") ?: "")
+                            DetailScreen(navController )
                         }
 
                     }

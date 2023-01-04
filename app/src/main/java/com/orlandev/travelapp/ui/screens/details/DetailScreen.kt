@@ -28,7 +28,6 @@ import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
 import com.orlandev.travelapp.data.Activities
-import com.orlandev.travelapp.ui.screens.home.HomeViewModel
 import com.orlandev.travelapp.ui.screens.home.ImageBanner
 import com.orlandev.travelapp.ui.theme.containerColor
 import com.orlandev.travelapp.ui.theme.starColors
@@ -39,11 +38,12 @@ import com.orlandev.travelapp.utils.horizontalPadding
 @Composable
 fun DetailScreen(
     navController: NavController,
-    detailViewModel: HomeViewModel = hiltViewModel(),
-    id: String
-) {
+    detailViewModel: DetailViewModel = hiltViewModel(),
 
-    val currentDestination = detailViewModel.dataResult.value.find { it.city == id } //Only for now
+    ) {
+
+    val currentDestination = detailViewModel.currentCityData.value//Only for now
+
     currentDestination?.let {
         Scaffold(modifier = Modifier.fillMaxSize()) {
 
@@ -73,7 +73,9 @@ fun DetailScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        IconButton(onClick = { /*TODO perform back navigation*/ }) {
+                        IconButton(onClick = {
+                            navController.popBackStack()
+                        }) {
                             Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = null)
                         }
 
