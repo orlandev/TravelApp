@@ -7,8 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.orlandev.travelapp.navigation.NavRoute
 import com.orlandev.travelapp.ui.screens.details.DetailScreen
+import com.orlandev.travelapp.ui.screens.home.HomeScreen
 import com.orlandev.travelapp.ui.theme.TravelAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +25,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
-            val systemUiController = rememberSystemUiController()
               TravelAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -28,8 +32,24 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    //HomeScreen()
-                    DetailScreen()
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = NavRoute.HomeScreenRoute.route
+                    ) {
+
+                        composable(route = NavRoute.HomeScreenRoute.route) {
+                            HomeScreen(navController = navController)
+                        }
+
+                        composable(
+                            route = NavRoute.DetailScreenRoute.route + "/{city}",
+                            arguments = listOf(navArgument("city") {})
+                        ) {
+                            DetailScreen(navController = navController)
+                        }
+
+                    }
                 }
             }
         }

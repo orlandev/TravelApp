@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.SubcomposeAsyncImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
@@ -35,7 +36,10 @@ import com.orlandev.travelapp.utils.horizontalPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(detailViewModel: DetailViewModel = hiltViewModel()) {
+fun DetailScreen(
+    detailViewModel: DetailViewModel = hiltViewModel(),
+    navController: NavHostController
+) {
 
     val currentDestination = detailViewModel.dataResult.value.random() //Only for now
 
@@ -67,7 +71,11 @@ fun DetailScreen(detailViewModel: DetailViewModel = hiltViewModel()) {
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        IconButton(onClick = { /*TODO perform back navigation*/ }) {
+                        IconButton(onClick = {
+
+                            navController.popBackStack()
+
+                        }) {
                             Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = null)
                         }
 
