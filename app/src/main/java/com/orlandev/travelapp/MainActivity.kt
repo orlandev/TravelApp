@@ -32,7 +32,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
-            val systemUiController = rememberSystemUiController()
             TravelAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
